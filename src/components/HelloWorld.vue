@@ -1,114 +1,238 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br />
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-        >vue-cli documentation</a
-      >.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel"
-          target="_blank"
-          rel="noopener"
-          >babel</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint"
-          target="_blank"
-          rel="noopener"
-          >eslint</a
-        >
-      </li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li>
-        <a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a>
-      </li>
-      <li>
-        <a href="https://forum.vuejs.org" target="_blank" rel="noopener"
-          >Forum</a
-        >
-      </li>
-      <li>
-        <a href="https://chat.vuejs.org" target="_blank" rel="noopener"
-          >Community Chat</a
-        >
-      </li>
-      <li>
-        <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
-          >Twitter</a
-        >
-      </li>
-      <li>
-        <a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a>
-      </li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li>
-        <a href="https://router.vuejs.org" target="_blank" rel="noopener"
-          >vue-router</a
-        >
-      </li>
-      <li>
-        <a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/vue-devtools#vue-devtools"
-          target="_blank"
-          rel="noopener"
-          >vue-devtools</a
-        >
-      </li>
-      <li>
-        <a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener"
-          >vue-loader</a
-        >
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-          rel="noopener"
-          >awesome-vue</a
-        >
-      </li>
-    </ul>
+  <div class="main">
+    <div class="color-list">
+      <div class="color-item" v-for="(item, index) in colorList" :key="index">
+        <div class="color-select">
+          <span>{{ item.label }}：{{ item.value }}</span>
+          <ColorSelect v-model="item.value" @change="changeColor"></ColorSelect>
+        </div>
+        <div class="color-level">
+          <div class="level-item" v-for="color in getColors(item.value, item.name)" :key="color.label">
+            <span class="color-bg" :style="{ background: color.value }"></span>
+            <span class="color-name">{{ color.label }}: {{ color.value }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2>自定义样式</h2>
+    <div>
+      <p class="test1">测试文字-主色</p>
+      <p class="test2">测试文字-主色-50%透明度</p>
+    </div>
+    <h2>Ant Vue 组件</h2>
+    <div>
+      <div>
+        <a-button type="primary"> Primary </a-button>
+        <a-button>Default</a-button>
+        <a-button type="dashed"> Dashed </a-button>
+        <a-button type="danger"> Danger </a-button>
+        <a-button type="primary"> 按钮 </a-button>
+        <a-button type="link"> Link </a-button>
+        <a-button type="primary" loading />
+        <a-button type="primary" shape="circle" loading />
+        <a-button type="danger" shape="round" loading />
+      </div>
+    </div>
+    <br />
+    <div>
+      <a-menu mode="horizontal" :defaultSelectedKeys="['mail']">
+        <a-menu-item key="mail"> <a-icon type="mail" />Navigation One </a-menu-item>
+        <a-menu-item key="app" disabled> <a-icon type="appstore" />Navigation Two </a-menu-item>
+        <a-sub-menu>
+          <span slot="title" class="submenu-title-wrapper"><a-icon type="setting" />Navigation Three - Submenu</span>
+          <a-menu-item-group title="Item 1">
+            <a-menu-item key="setting:1"> Option 1 </a-menu-item>
+            <a-menu-item key="setting:2"> Option 2 </a-menu-item>
+          </a-menu-item-group>
+          <a-menu-item-group title="Item 2">
+            <a-menu-item key="setting:3"> Option 3 </a-menu-item>
+            <a-menu-item key="setting:4"> Option 4 </a-menu-item>
+          </a-menu-item-group>
+        </a-sub-menu>
+      </a-menu>
+    </div>
+    <br />
+    <div>
+      <a-checkbox> Checkbox </a-checkbox>
+      <a-checkbox checked> Checkbox </a-checkbox>
+      <a-checkbox checked disabled> Checkbox - Disabled </a-checkbox>
+    </div>
+    <br />
+    <div>
+      <div>
+        <a-date-picker />
+      </div>
+      <br />
+      <div>
+        <a-month-picker placeholder="Select month" />
+      </div>
+      <br />
+      <div>
+        <a-range-picker />
+      </div>
+      <br />
+      <div>
+        <a-week-picker placeholder="Select week" />
+      </div>
+    </div>
+    <div style="width: 300px">
+      <a-input placeholder="Basic usage" />
+      <br />
+      <a-input-search placeholder="input search text" enter-button="Search" size="large" />
+    </div>
+    <br />
+    <div>
+      <a-radio-group name="radioGroup" default-value="a">
+        <a-radio value="a"> Hangzhou </a-radio>
+        <a-radio value="b" disabled> Shanghai </a-radio>
+        <a-radio value="c"> Beijing </a-radio>
+        <a-radio value="d"> Chengdu </a-radio>
+      </a-radio-group>
+      <br />
+      <a-radio-group default-value="a" button-style="solid">
+        <a-radio-button value="a"> Hangzhou </a-radio-button>
+        <a-radio-button value="b" disabled> Shanghai </a-radio-button>
+        <a-radio-button value="c"> Beijing </a-radio-button>
+        <a-radio-button value="d"> Chengdu </a-radio-button>
+      </a-radio-group>
+    </div>
+    <br />
+    <div>
+      <a-switch default-checked />
+      <a-switch default-checked disabled />
+    </div>
+    <br />
+    <div>
+      <a-alert message="Success Tips" type="success" show-icon />
+      <br />
+      <a-alert message="Informational Notes" type="info" show-icon />
+      <br />
+      <a-alert message="Warning" type="warning" show-icon />
+      <br />
+      <a-alert message="Error" type="error" show-icon />
+      <br />
+      <a-alert
+        message="Success Tips"
+        description="Detailed description and advices about successful copywriting."
+        type="success"
+        show-icon
+      />
+      <br />
+      <a-alert
+        message="Informational Notes"
+        description="Additional description and informations about copywriting."
+        type="info"
+        show-icon
+      />
+      <a-alert message="Warning" description="This is a warning notice about copywriting." type="warning" show-icon />
+      <br />
+      <a-alert message="Error" description="This is an error message about copywriting." type="error" show-icon />
+    </div>
   </div>
 </template>
 
 <script>
+import ColorSelect from './Select/ColorSelect'
+import variables from '../styles/variables.less'
+import generate from '@ant-design/colors/lib/generate'
+import { updateTheme } from '@/utils/util.js'
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
+  components: {
+    ColorSelect,
   },
-};
+  data() {
+    return {
+      variables,
+      colorList: [
+        {
+          name: 'mainColor',
+          label: '主色',
+          value: variables.mainColor,
+        },
+        {
+          name: 'greenColor',
+          label: '绿色',
+          value: variables.greenColor,
+        },
+        {
+          name: 'redColor',
+          label: '红色',
+          value: variables.redColor,
+        },
+        {
+          name: 'orangeColor',
+          label: '橘黄色',
+          value: variables.orangeColor,
+        },
+      ],
+      colorsMap: {
+        mainColor: variables.mainColor, // 主色
+        greenColor: variables.greenColor, // 绿色
+        redColor: variables.redColor, // 红色
+        orangeColor: variables.orangeColor, // 橘黄色
+      },
+    }
+  },
+  methods: {
+    getColors(color, name) {
+      const colors = generate(color).map((item, index) => {
+        const i = index + 1
+        return {
+          label: `${name}${i !== 6 ? i : ''}`,
+          value: item,
+        }
+      })
+      return colors
+    },
+    changeColor() {
+      const colorsMap = {}
+      this.colorList.map((item) => {
+        colorsMap[item.name] = item.value
+      })
+      updateTheme(colorsMap)
+    },
+  },
+}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style lang="less" scoped>
+// 强制覆盖link按钮的默认透明边框
+.ant-btn-link:hover,
+.ant-btn-link:focus,
+.ant-btn-link:active {
+  border-color: transparent !important;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+// danger按钮特殊处理下active颜色
+.ant-btn-danger:active,
+.ant-btn-danger.active {
+  background-color: @redColor7;
+  border-color: @redColor7;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.main {
+  text-align: left;
 }
-a {
-  color: #42b983;
+.color-list {
+  display: flex;
+  .color-item {
+    width: 25%;
+    .color-select,
+    .level-item {
+      display: flex;
+      align-items: center;
+    }
+    .color-bg,
+    .color-name {
+      width: 50%;
+      height: 30px;
+      line-height: 30px;
+    }
+  }
+}
+.test1 {
+  color: @mainColor;
+}
+.test2 {
+  color: fade(@mainColor, 50%);
 }
 </style>
