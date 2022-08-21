@@ -16,8 +16,20 @@
     </div>
     <h2>自定义样式</h2>
     <div>
-      <p class="test1">测试文字-主色</p>
-      <p class="test2">测试文字-主色-50%透明度</p>
+      <span class="test1">测试文字-主色</span>
+      <span class="test2">测试文字-主色-50%透明度</span>
+      <span class="test3">测试文字-绿色</span>
+      <span class="test4">测试文字-绿色-50%透明度</span>
+      <span class="test5">测试文字-红色</span>
+      <span class="test6">测试文字-红色-50%透明度</span>
+      <span class="test7">测试文字-橘黄色</span>
+      <span class="test8">测试文字-橘黄色-50%透明度</span>
+    </div>
+    <div>
+      <span class="mainColor8">测试文字-mainColor8</span>
+      <span class="greenColor8">测试文字-greenColor8</span>
+      <span class="redColor8">测试文字-redColor8</span>
+      <span class="orangeColor8">测试文字-orangeColor8</span>
     </div>
     <h2>Ant Vue 组件</h2>
     <div>
@@ -208,7 +220,6 @@ export default {
   background-color: @redColor7;
   border-color: @redColor7;
 }
-
 .main {
   text-align: left;
 }
@@ -234,5 +245,35 @@ export default {
 }
 .test2 {
   color: fade(@mainColor, 50%);
+}
+.test3 {
+  color: @greenColor;
+}
+.test4 {
+  color: fade(@greenColor, 50%);
+}
+.test5 {
+  color: @redColor;
+}
+.test6 {
+  color: fade(@redColor, 50%);
+}
+.test7 {
+  color: @orangeColor;
+}
+.test8 {
+  color: fade(@orangeColor, 50%);
+}
+.mainColor8 {
+  color: @mainColor8;
+}
+.greenColor8 {
+  color: @greenColor8;
+}
+.redColor8 {
+  color: @redColor8;
+}
+.orangeColor8 {
+  color: @orangeColor8;
 }
 </style>
