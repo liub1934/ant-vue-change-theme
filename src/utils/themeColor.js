@@ -14,6 +14,7 @@ export default {
   },
   changeColor(colorsMap) {
     let newColors = []
+    // 颜色顺序需要和matchColors严格一致
     const colorNames = ['mainColor', 'greenColor', 'orangeColor', 'redColor']
     colorNames.map((name) => {
       newColors = [...newColors, ...this.getAntdSerials(colorsMap[name])]

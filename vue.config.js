@@ -35,12 +35,14 @@ const getAntdSerials = (color) => {
   })
   // colorPalette变换得到颜色值
   const colorPalettes = generate(color)
+  // rgb颜色
   const rgbColors = colorPalettes.map((item) => ThemeColorReplacer.varyColor.toNum3(item.replace('#', '')).join(','))
   return [...lightens, ...colorPalettes, ...rgbColors]
 }
 // 获取匹配颜色
 const getMatchColors = () => {
   let matchColors = []
+  // 颜色顺序需要严格一直
   const changeColors = [variables.mainColor, variables.greenColor, variables.orangeColor, variables.redColor]
   changeColors.map((color) => {
     matchColors = [...matchColors, ...getAntdSerials(color)]
@@ -75,7 +77,6 @@ const ThemeColorReplacerPlugin = new ThemeColorReplacer({
       case '.ant-menu-horizontal > .ant-menu-item > a:hover':
       case '.ant-menu-horizontal>.ant-menu-item>a:hover':
         return '.ant-menu-horizontal:not(ant-menu-light):not(.ant-menu-dark) > .ant-menu-item > a:hover'
-
       case '.ant-checkbox-checked .ant-checkbox-inner':
         return '.ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner'
       case '.ant-radio-button-wrapper:hover':
@@ -87,6 +88,7 @@ const ThemeColorReplacerPlugin = new ThemeColorReplacer({
 })
 
 module.exports = {
+  publicPath: '/ant-vue-change-theme/',
   css: {
     loaderOptions: {
       less: {
