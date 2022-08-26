@@ -1,16 +1,13 @@
 #!/usr/bin/env sh
 
-# 确保脚本抛出遇到的错误
+# 当发生错误时中止脚本
 set -e
 
-# 生成静态文件
-npm run build
+# 构建
+yarn build
 
-# 进入生成的文件夹
+# cd 到构建输出的目录下
 cd dist
-
-# 如果是发布到自定义域名
-# echo 'www.example.com' > CNAME
 
 git init
 git add -A
@@ -19,10 +16,7 @@ git commit -m 'deploy'
 git config --local user.name "liub1934"
 git config --local user.email "liub1934@gmail.com"
 
-# 如果发布到 https://<USERNAME>.github.io
-# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git master
-
-# 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f https://${access_token}@github.com/liub1934/lb-element-table.git main:gh-pages
+# 部署到 https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:liub1934/ant-vue-change-theme.git master:gh-pages
 
 cd -
